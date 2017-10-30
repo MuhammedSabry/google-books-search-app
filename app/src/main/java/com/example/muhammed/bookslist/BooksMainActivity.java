@@ -1,9 +1,6 @@
 package com.example.muhammed.bookslist;
 
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -12,10 +9,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class BooksMainActivity extends AppCompatActivity {
+    //BroadcastReceiver broadcastReceiver;
+    public static String BOOK_INTENT_EXTRA = "Book";
     TextView searchTextView;
     Button searchButton;
-    BroadcastReceiver broadcastReceiver;
-    public static String BOOK_INTENT_EXTRA = "Book";
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {

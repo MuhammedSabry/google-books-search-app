@@ -102,7 +102,7 @@ public class Query {
             //holding the author and title of the book
             String title, author;
 
-            if(s.equals("Not Found"))
+            if (s.equals("Not Found"))
                 return null;
             //holding the main JSON OBJECT
             JSONObject MasterObject = new JSONObject(s);
@@ -135,42 +135,21 @@ public class Query {
                 //adding the jsonbook to the ArrayList of books 
                 book.add(jsonbook);
             }
-        } 
-        catch (JSONException e) {
+        } catch (JSONException e) {
         }
         return book;
     }
 
-    private static Bitmap getBitmap(String s)
-    {
-        BitMapDownloader downloader = new BitMapDownloader();
-         downloader.execute(s);
+
+    private static Bitmap getBitmap(String s) {
         Bitmap img = null;
-        try
-        {
-             img = downloader.get();
-        }
-        catch (Exception e)
-        {
-
+        try {
+            InputStream mapStream = new java.net.URL(s).openStream();
+            img = BitmapFactory.decodeStream(mapStream);
+        } catch (IOException e) {
         }
         return img;
     }
 
-    private static class BitMapDownloader extends AsyncTask<String, Void, Bitmap> {
-
-        @Override
-        protected Bitmap doInBackground(String... strings) {
-            Bitmap img = null;
-            try {
-                InputStream mapstream = new java.net.URL(strings[0]).openStream();
-                img = BitmapFactory.decodeStream(mapstream);
-            }
-            catch (IOException e)
-            {
-            }
-        return img;
-        }
-    }
 
 }

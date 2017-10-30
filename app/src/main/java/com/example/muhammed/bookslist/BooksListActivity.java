@@ -3,6 +3,7 @@ package com.example.muhammed.bookslist;
 import android.app.LoaderManager;
 import android.content.Intent;
 import android.content.Loader;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -12,6 +13,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,7 +39,13 @@ public class BooksListActivity extends AppCompatActivity implements LoaderManage
         Intent bookintent = getIntent();
         String bookSearch = bookintent.getStringExtra(BooksMainActivity.BOOK_INTENT_EXTRA);
 
-        url = "https://www.googleapis.com/books/v1/volumes?q=" + bookSearch;
+        Uri.Builder uriBuilder = new Uri.Builder();
+        uriBuilder.scheme("https")
+                .authority("www.googleapis.com")
+                .appendPath("books")
+                .appendPath("v1")
+                .appendPath("volumes").appendQueryParameter("q",bookSearch).build();
+            url = uriBuilder.toString();
 
         //initializing the list view with empty list
         bookslist = findViewById(R.id.bookslist);
